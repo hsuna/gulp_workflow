@@ -1,4 +1,5 @@
 var gulp = require("gulp");
+var babel = require("gulp-babel");
 var autoprefixer = require("gulp-autoprefixer"); // 处理css中浏览器兼容的前缀
 var rename = require("gulp-rename"); //重命名
 var cssnano = require("gulp-cssnano"); // css的层级压缩合并
@@ -66,6 +67,7 @@ gulp.task("js", function() {
     .src(config.js.src)
     .pipe(jshint(".jshintrc"))
     .pipe(jshint.reporter("default"))
+    .pipe(babel()) 
     .pipe(gulp.dest(config.js.dist))
     .pipe(
       rename({
@@ -84,6 +86,7 @@ gulp.task("js-concat", function() {
     .src(config.js.src)
     .pipe(jshint(".jshintrc"))
     .pipe(jshint.reporter("default"))
+    .pipe(babel()) 
     .pipe(concat(config.js.build_name))
     .pipe(gulp.dest(config.js.dist))
     .pipe(
